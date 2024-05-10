@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+
+import Dialog from './components/Dialog';
+import StarRating from './components/StarRating';
+
+import { useState } from 'react';
 
 function App() {
+  const dialogIcon = 'https://raw.githubusercontent.com/josephadoga/josephadoga/main/assets/favicon.png';
+
+  const [showDialog, setShowDialog] = useState(false);
+
+  const close = () => {
+    setShowDialog(false);
+  }
+
+  const overlay = <div className='overlay' onClick={close}></div>;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      { showDialog ? overlay : null }
+      <div className='container main-center'>
+        <Dialog dialogIcon={dialogIcon} show={showDialog} close={close} />
+        <button className='open' onClick={() => { setShowDialog(true) }}>Open Dialog</button>
+        <StarRating />
+      </div>
+    </main>
   );
 }
 
